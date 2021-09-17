@@ -16,24 +16,61 @@ limitations under the License.
 package cmd
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"net/http"
 
 	"github.com/spf13/cobra"
 )
 
 // getCmd represents the get command
+type UrlResponse struct {
+	LongUrl  string `json:"longUrl"`
+	ShortUrl string `json:"shortUrl"`
+}
+
+// getCmd represents the get command
 var getCmd = &cobra.Command{
 	Use:   "get",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Shorten the URL",
+	Long:  `Shorten the URL`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("get called")
+
+		if len(args) != 0 && len(args) == 1 {
+			longUrl := args[0]
+			getShortenURL(longUrl)
+		} else {
+			fmt.Println("command not exist")
+		}
 	},
+}
+
+func getShortenURL(URL string) {
+	requestAPI := "https://short-url-sample.herokuapp.com/api/url-shortener/v1/url"
+	requestBody, _ := json.Marshal(map[string]string{
+		"longUrl": URL,
+	})
+
+	res, err := http.Post(requestAPI,
+		"application/json", bytes.NewBuffer(requestBody))
+	if err != nil {
+		print(err)
+	}
+	defer res.Body.Close()
+
+	response, err := ioutil.ReadAll(res.Body)
+	if res.StatusCode == 200 {
+		if err != nil {
+			print(err)
+		}
+		var urlResponse UrlResponse
+		json.Unmarshal([]byte(response), &urlResponse)
+		fmt.Println(urlResponse.ShortUrl)
+	} else {
+		fmt.Println(string(response))
+	}
 }
 
 func init() {

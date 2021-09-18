@@ -22,13 +22,20 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	"github.com/borischen0203/shoris/config"
 	"github.com/spf13/cobra"
 )
 
-// getCmd represents the get command
 type UrlResponse struct {
-	LongUrl  string `json:"longUrl"`
-	ShortUrl string `json:"shortUrl"`
+	Code   int      `json:"code"`
+	Errors []string `json:"errors"`
+	Data   struct {
+		URL     string   `json:"url"`
+		Domain  string   `json:"domain"`
+		Alias   string   `json:"alias"`
+		Tags    []string `json:"tags"`
+		TinyURL string   `json:"tiny_url"`
+	} `json:"data"`
 }
 
 // getCmd represents the get command
@@ -48,9 +55,12 @@ var getCmd = &cobra.Command{
 }
 
 func getShortenURL(URL string) {
-	requestAPI := "https://short-url-sample.herokuapp.com/api/url-shortener/v1/url"
+	token := config.Env.Api_token
+	requestAPI := "https://api.tinyurl.com/create?api_token=" + token
 	requestBody, _ := json.Marshal(map[string]string{
-		"longUrl": URL,
+		"url":    URL,
+		"domain": "tiny.one",
+		"alias":  "",
 	})
 
 	res, err := http.Post(requestAPI,
@@ -61,15 +71,16 @@ func getShortenURL(URL string) {
 	defer res.Body.Close()
 
 	response, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		print(err)
+	}
+	var urlResponse UrlResponse
+	json.Unmarshal([]byte(response), &urlResponse)
+
 	if res.StatusCode == 200 {
-		if err != nil {
-			print(err)
-		}
-		var urlResponse UrlResponse
-		json.Unmarshal([]byte(response), &urlResponse)
-		fmt.Println(urlResponse.ShortUrl)
+		fmt.Println(urlResponse.Data.TinyURL)
 	} else {
-		fmt.Println(string(response))
+		fmt.Println(urlResponse.Errors[0])
 	}
 }
 

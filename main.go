@@ -17,11 +17,10 @@ package main
 
 import (
 	"github.com/borischen0203/shoris/cmd"
-	"github.com/borischen0203/shoris/config"
 	_ "github.com/joho/godotenv/autoload"
 )
 
 func main() {
-	config.Setup()
+	// config.Setup()
 	cmd.Execute()
 }

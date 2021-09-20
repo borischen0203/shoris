@@ -22,7 +22,6 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/borischen0203/shoris/config"
 	"github.com/spf13/cobra"
 )
 
@@ -55,8 +54,8 @@ var getCmd = &cobra.Command{
 }
 
 func getShortenURL(URL string) {
-	token := config.Env.Api_token
-	// token := "uYcUCgvOMB3XYGAXAUmO3uojC9TjqZHlWG8sQJ4IeoKZxlOvSou706TgTpg7"
+	// token := config.Env.Api_token
+	token := "uYcUCgvOMB3XYGAXAUmO3uojC9TjqZHlWG8sQJ4IeoKZxlOvSou706TgTpg7"
 	requestAPI := "https://api.tinyurl.com/create?api_token=" + token
 	requestBody, _ := json.Marshal(map[string]string{
 		"url":    URL,

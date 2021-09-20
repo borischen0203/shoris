@@ -56,6 +56,7 @@ var getCmd = &cobra.Command{
 
 func getShortenURL(URL string) {
 	token := config.Env.Api_token
+	// token := "uYcUCgvOMB3XYGAXAUmO3uojC9TjqZHlWG8sQJ4IeoKZxlOvSou706TgTpg7"
 	requestAPI := "https://api.tinyurl.com/create?api_token=" + token
 	requestBody, _ := json.Marshal(map[string]string{
 		"url":    URL,
@@ -85,6 +86,7 @@ func getShortenURL(URL string) {
 }
 
 func init() {
+	// config.Setup()
 	rootCmd.AddCommand(getCmd)
 
 	// Here you will define your flags and configuration settings.

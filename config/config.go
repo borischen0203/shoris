@@ -7,7 +7,7 @@ import (
 )
 
 type envConfig struct {
-	Api_token string `env:"api_token,required"`
+	Api_token string `env:"Api_token,required"`
 }
 
 var (
@@ -20,4 +20,6 @@ func Setup() {
 	if err := env.Parse(&Env); err != nil {
 		log.Fatalf("%+v\n", err)
 	}
+
+	// fmt.Printf("%+v\n", Env)
 }

@@ -17,10 +17,8 @@ package main
 
 import (
 	"github.com/borischen0203/shoris/cmd"
-	_ "github.com/joho/godotenv/autoload"
 )
 
 func main() {
-	// config.Setup()
 	cmd.Execute()
 }

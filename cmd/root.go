@@ -16,8 +16,13 @@ limitations under the License.
 package cmd
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"net/http"
 	"os"
+
 	"github.com/spf13/cobra"
 
 	"github.com/spf13/viper"
@@ -25,19 +30,70 @@ import (
 
 var cfgFile string
 
+type UrlResponse struct {
+	Code   int      `json:"code"`
+	Errors []string `json:"errors"`
+	Data   struct {
+		URL     string   `json:"url"`
+		Domain  string   `json:"domain"`
+		Alias   string   `json:"alias"`
+		Tags    []string `json:"tags"`
+		TinyURL string   `json:"tiny_url"`
+	} `json:"data"`
+}
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "shoris",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Be able to shorten the long URL",
+	Long:  `Be able to shorten the long URL`,
+	Args:  cobra.RangeArgs(1, 2),
+	Run: func(cmd *cobra.Command, args []string) {
+		alias := ""
+		if len(args) != 0 {
+			longUrl := args[0]
+			if len(args) == 2 {
+				alias = args[1]
+			}
+			getShortenURL(longUrl, alias)
+		} else {
+			fmt.Println("command error")
+		}
+	},
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
+}
+
+//getShortenURL function mainly generate a short url
+func getShortenURL(URL string, alias string) {
+	token := "uYcUCgvOMB3XYGAXAUmO3uojC9TjqZHlWG8sQJ4IeoKZxlOvSou706TgTpg7"
+	requestAPI := "https://api.tinyurl.com/create?api_token=" + token
+	requestBody, _ := json.Marshal(map[string]string{
+		"url":    URL,
+		"domain": "tiny.one",
+		"alias":  alias,
+	})
+
+	res, err := http.Post(requestAPI,
+		"application/json", bytes.NewBuffer(requestBody))
+	if err != nil {
+		print(err)
+	}
+	defer res.Body.Close()
+
+	response, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		print(err)
+	}
+	var urlResponse UrlResponse
+	json.Unmarshal([]byte(response), &urlResponse)
+
+	if res.StatusCode == 200 {
+		fmt.Println(urlResponse.Data.TinyURL)
+	} else {
+		fmt.Println(urlResponse.Errors[0])
+	}
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

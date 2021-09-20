@@ -1,12 +1,12 @@
-<!-- <img src="https://raw.githubusercontent.com/scraly/gophers/main/mac-gopher.png" alt="mac-gopher" width=500 height=474 >
+<img src="https://raw.githubusercontent.com/scraly/gophers/main/harry-gopher.png" alt="jedi-gopher" width=300 >
 
 <p align="Left">
   <p align="Left">
-    <a href="https://github.com/borischen0203/goris/releases/latest"><img alt="GitHub release" src="https://img.shields.io/github/v/release/borischen0203/goris.svg?logo=github&style=flat-square"></a>
-    <a href="https://github.com/borischen0203/goris/actions/workflows/go.yml"><img alt="GitHub release" src="https://github.com/borischen0203/goris/actions/workflows/go.yml/badge.svg?logo=github&style=flat-square"></a>
-    <a href="https://goreportcard.com/report/github.com/borischen0203/goris"><img src="https://goreportcard.com/badge/github.com/borischen0203/goris" alt="Code Status" /></a>
+    <a href="https://github.com/borischen0203/shoris/releases/latest"><img alt="GitHub release" src="https://img.shields.io/github/v/release/borischen0203/shoris.svg?logo=github&style=flat-square"></a>
+    <a href="https://github.com/borischen0203/shoris/actions/workflows/go.yml"><img alt="GitHub release" src="https://github.com/borischen0203/shoris/actions/workflows/go.yml/badge.svg?logo=github&style=flat-square"></a>
+    <a href="https://goreportcard.com/report/github.com/borischen0203/shoris"><img src="https://goreportcard.com/badge/github.com/borischen0203/shoris" alt="Code Status" /></a>
   </p>
-</p> -->
+</p>
 
 # shoris
 This `shoris` command-line tool is able to shorten a long url.
@@ -26,11 +26,15 @@ This `shoris` command-line tool is able to shorten a long url.
 
 ## How to use
 
-### Make sure you install a chrome browser
-
 ### Demo example
 ```bash
-> shoris https://www.google.com/
+//without alias
+> shoris https://www.youtube.com/watch?v=072tU1tamd0
+https://tiny.one/pm8ap5fx
+
+//with alias
+> shoris https://www.youtube.com/watch?v=072tU1tamd0 hotpot
+https://tiny.one/hotpot
 
 ```
 

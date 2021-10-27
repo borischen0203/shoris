@@ -28,12 +28,12 @@ This `shoris` command-line tool is able to shorten a long url.
 
 ### Demo example
 ```bash
-//without alias
-> shoris https://www.youtube.com/watch?v=072tU1tamd0
+# without alias
+$ shoris https://www.youtube.com/watch?v=072tU1tamd0
 https://tiny.one/pm8ap5fx
 
-//with alias
-> shoris https://www.youtube.com/watch?v=072tU1tamd0 hotpot
+# with alias
+$ shoris https://www.youtube.com/watch?v=072tU1tamd0 hotpot
 https://tiny.one/hotpot
 
 ```

@@ -57,7 +57,7 @@ var rootCmd = &cobra.Command{
 			}
 			getShortenURL(longUrl, alias)
 		} else {
-			fmt.Println("command error"
+			fmt.Println("command error")
 		}
 	},
 	// Uncomment the following line if your bare application

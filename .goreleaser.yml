@@ -1,7 +1,5 @@
 # This is an example .goreleaser.yml file with some sane defaults.
 # Make sure to check the documentation at http://goreleaser.com
-env:
-   - GO111MODULE=on
 before:
   hooks:
     - go mod tidy
@@ -32,7 +30,7 @@ changelog:
 brews:
 - name: shoris
   # goarm: 6
-  homepage: https://github.com/scraly/homebrew-shoris
+  homepage: https://github.com/borischen0203/homebrew-shoris
   tap:
     owner: borischen0203
     name: homebrew-shoris

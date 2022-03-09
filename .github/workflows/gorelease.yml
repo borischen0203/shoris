@@ -25,8 +25,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      -
-        name: Set up Go
+      - name: Set up Go
         uses: actions/setup-go@v2
         with:
           go-version: 1.16
@@ -35,7 +34,7 @@ jobs:
         with:
           distribution: goreleaser
           version: latest
-          args: release --rm-dist --debug
+          args: release --rm-dist
         env:
           GITHUB_TOKEN: ${{ secrets.GH_GORELEASER }}
     needs: [build]

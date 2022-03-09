@@ -32,7 +32,7 @@ changelog:
 brews:
 - name: shoris
   # goarm: 6
-  homepage: https://github.com/scraly/homebrew-shoris
+  homepage: https://github.com/borischen0203/homebrew-shoris
   tap:
     owner: borischen0203
     name: homebrew-shoris

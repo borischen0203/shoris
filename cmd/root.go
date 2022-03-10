@@ -93,8 +93,9 @@ func getShortenURL(URL string, alias string) {
 	json.Unmarshal([]byte(response), &urlResponse)
 
 	if res.StatusCode == 200 {
-		fmt.Println(urlResponse.Data.TinyURL)
+		fmt.Println("( *・ω・)✄╰ひ╯ " + urlResponse.Data.TinyURL)
 		writeClip(urlResponse.Data.TinyURL)
+		fmt.Println("Short URL has been saved to clipboard!")
 	} else {
 		fmt.Println(urlResponse.Errors[0])
 	}

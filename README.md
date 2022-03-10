@@ -15,13 +15,24 @@ This `shoris` command-line tool is able to shorten a long url.
 ## Features
 - Be able to shorten a long url.
 - Be able to custom alias.
+- Auto write short URL to clipboard.
 
 ## Installation
 
 ### On macOS via Homebrew
+Step1:
 ```bash
-> brew tap borischen0203/shoris
-> brew install shoris
+brew tap borischen0203/shoris
+```
+Step2:
+```bash
+brew install shoris
+```
+Or
+
+One line command
+```bash
+brew install borischen0203/shoris/shoris
 ```
 
 ## How to use
@@ -46,4 +57,5 @@ https://tiny.one/hotpot
 
 ### Todo:
 - [X] Custom alias.
+- [X] Auto write to clipboard.
 

@@ -19,9 +19,12 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
+	"os/exec"
 
 	"github.com/spf13/cobra"
 
@@ -91,8 +94,28 @@ func getShortenURL(URL string, alias string) {
 
 	if res.StatusCode == 200 {
 		fmt.Println(urlResponse.Data.TinyURL)
+		writeClip(urlResponse.Data.TinyURL)
 	} else {
 		fmt.Println(urlResponse.Errors[0])
+	}
+}
+
+//Write data to clipboard
+func writeClip(URL string) {
+	cmd := exec.Command("pbcopy")
+	str, err := cmd.StdinPipe()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	go func() {
+		defer str.Close()
+		io.WriteString(str, URL)
+	}()
+
+	_, err = cmd.CombinedOutput()
+	if err != nil {
+		log.Fatal(err)
 	}
 }
 

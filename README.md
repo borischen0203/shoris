@@ -41,11 +41,13 @@ brew install borischen0203/shoris/shoris
 ```bash
 # without alias
 $ shoris https://www.youtube.com/watch?v=072tU1tamd0
-https://tiny.one/pm8ap5fx
+( *・ω・)✄╰ひ╯ https://tiny.one/pm8ap5fx
+Short URL has been saved to clipboard!
 
 # with alias
 $ shoris https://www.youtube.com/watch?v=072tU1tamd0 hotpot
-https://tiny.one/hotpot
+( *・ω・)✄╰ひ╯ https://tiny.one/hotpot
+Short URL has been saved to clipboard!
 
 ```
 

@@ -15,3 +15,6 @@
 # vendor/
 
 dist/
+bin/
+.DS_Store
+.vscode/

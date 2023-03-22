@@ -74,7 +74,7 @@ func getShortenURL(URL string, alias string) {
 	requestAPI := "https://api.tinyurl.com/create?api_token=" + token
 	requestBody, _ := json.Marshal(map[string]string{
 		"url":    URL,
-		"domain": "tiny.one",
+		"domain": "tinyurl.com",
 		"alias":  alias,
 	})
 

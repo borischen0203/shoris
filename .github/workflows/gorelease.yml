@@ -2,8 +2,8 @@ name: gorelease
 
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - master
 
 jobs:
   build:
@@ -19,12 +19,19 @@ jobs:
       run: go build -v ./...
 
   goreleaser:
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - name: Bump Version
+        uses: marvinpinto/action-automatic-releases@v1.2.1
+        with:
+         repo-token: ${{ secrets.GITHUB_TOKEN }}
+         major-only: false
+         prerelease: false
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
@@ -36,5 +43,5 @@ jobs:
           version: latest
           args: release --rm-dist --debug
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_GORELEASER }}
-    needs: [build]
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_GORELEASER: ${{ secrets.GH_GORELEASER }}

@@ -97,6 +97,7 @@ func getShortenURL(URL string, alias string) {
 		fmt.Print("( *・ω・)✄╰ひ╯ ")
 		color.Blue(urlResponse.Data.TinyURL + "\n")
 		writeClip(urlResponse.Data.TinyURL)
+
 		color.Magenta("URL has been saved to clipboard! ─=≡Σ((( つ•̀ω•́)つ")
 	} else {
 		fmt.Println(urlResponse.Errors[0])

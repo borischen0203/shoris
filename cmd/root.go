@@ -26,6 +26,7 @@ import (
 	"os"
 	"os/exec"
 
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 
 	"github.com/spf13/viper"
@@ -94,9 +95,9 @@ func getShortenURL(URL string, alias string) {
 
 	if res.StatusCode == 200 {
 		fmt.Print("( *・ω・)✄╰ひ╯ ")
-		fmt.Printf("\x1b[34m%s\x1b[0m", urlResponse.Data.TinyURL+"\n")
+		color.Blue(urlResponse.Data.TinyURL + "\n")
 		writeClip(urlResponse.Data.TinyURL)
-		fmt.Println("Short URL has been saved to clipboard!")
+		color.Magenta("URL has been saved to clipboard! ─=≡Σ((( つ•̀ω•́)つ")
 	} else {
 		fmt.Println(urlResponse.Errors[0])
 	}

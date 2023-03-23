@@ -14,8 +14,9 @@ require (
 	gopkg.in/ini.v1 v1.66.4 // indirect
 )
 
+require github.com/fatih/color v1.15.0
+
 require (
-	github.com/fatih/color v1.15.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/magiconair/properties v1.8.6 // indirect
